@@ -736,11 +736,6 @@ html[data-theme="dark"] .topbar.is-scrolled {
   color: var(--brand);
   background: var(--brand-soft);
 }
-  border-color: color-mix(in srgb, var(--brand) 22%, transparent);
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--brand) 12%, transparent),
-    0 4px 12px color-mix(in srgb, var(--brand-soft) 70%, transparent);
-}
 .topbar-action-icon {
   display: inline-grid;
   place-items: center;
