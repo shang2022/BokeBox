@@ -558,92 +558,32 @@ select.plugin-config-control {
   white-space: nowrap;
 }
 
-/* nav · 现代化顶栏 / 底栏
- * 参考 iOS Liquid Glass + 字节式分段导航：
- * - 顶栏毛玻璃 + 悬浮胶囊轨道
- * - 激活项实心胶囊高亮 + 轻阴影
- * - 底栏浮动圆角坞（floating dock）
- */
+/* nav · 简约顶栏 / 底栏 */
 .topbar {
   position: sticky;
   top: 0;
   z-index: var(--z-nav);
   padding-top: max(var(--space-1_5), var(--safe-top));
-  border-bottom: 0;
-  box-shadow: none;
-  /* 默认：顶部极透，内容直接透上来 */
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--bg) 58%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 28%, transparent) 68%,
-      transparent 100%
-    );
-  backdrop-filter: blur(10px) saturate(1.12);
-  -webkit-backdrop-filter: blur(10px) saturate(1.12);
-  transition:
-    background var(--dur) var(--ease),
-    border-color var(--dur) var(--ease),
-    box-shadow var(--dur) var(--ease),
-    backdrop-filter var(--dur) var(--ease),
-    -webkit-backdrop-filter var(--dur) var(--ease);
+  border-bottom: 1px solid var(--separator);
+  background: color-mix(in srgb, var(--bg) 95%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background var(--dur) var(--ease);
 }
-/* 顶栏与内容自然溶合，不再画硬分割线 */
-.topbar.is-solid,
-.topbar:hover {
-  border-bottom-color: transparent;
-  box-shadow: none;
-}
-/* 滚远后略实，保证标题/胶囊可读，仍保持溶合 */
+/* 顶栏滚动状态 */
 .topbar.is-scrolled {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--bg) 86%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 62%, transparent) 74%,
-      color-mix(in srgb, var(--bg) 18%, transparent) 100%
-    );
-  backdrop-filter: blur(var(--blur-4xl)) saturate(1.28);
-  -webkit-backdrop-filter: blur(var(--blur-4xl)) saturate(1.28);
-}
-html[data-theme="dark"] .topbar {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--bg) 48%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 22%, transparent) 70%,
-      transparent 100%
-    );
+  background: color-mix(in srgb, var(--bg) 98%, transparent);
 }
 html[data-theme="dark"] .topbar.is-scrolled {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--bg) 82%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 56%, transparent) 72%,
-      color-mix(in srgb, var(--bg) 16%, transparent) 100%
-    );
-}
-html[data-theme="dark"] .topbar.is-solid,
-html[data-theme="dark"] .topbar:hover {
-  box-shadow: none;
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
 }
 
-/* 顶部态：胶囊更轻；滚动后略实 */
+/* 导航轨道简化样式 */
 .topbar.is-at-top .topbar-nav-track {
-  border-color: color-mix(in srgb, var(--separator) 48%, transparent);
-  background: color-mix(in srgb, var(--surface) 34%, transparent);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--white) 28%, transparent);
+  background: transparent;
 }
 .topbar.is-scrolled .topbar-nav-track {
-  border-color: color-mix(in srgb, var(--separator) 70%, transparent);
-  background: color-mix(in srgb, var(--surface) 58%, transparent);
-}
-html[data-theme="dark"] .topbar.is-at-top .topbar-nav-track {
-  background: color-mix(in srgb, var(--surface) 24%, transparent);
-}
-html[data-theme="dark"] .topbar.is-scrolled .topbar-nav-track {
-  background: color-mix(in srgb, var(--surface) 42%, transparent);
+  background: transparent;
 }
 
 .topbar-inner {
@@ -651,8 +591,8 @@ html[data-theme="dark"] .topbar.is-scrolled .topbar-nav-track {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  min-height: var(--control-9xl);
-  padding-block: var(--space-1_5);
+  min-height: 64px;
+  padding-block: var(--space-1);
 }
 
 .topbar-brand {
@@ -678,30 +618,10 @@ html[data-theme="dark"] .topbar.is-scrolled .topbar-nav-track {
   display: inline-grid;
   place-items: center;
   flex-shrink: 0;
-  width: var(--control-3xl);
-  height: var(--control-3xl);
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-md);
-  background:
-    linear-gradient(
-      160deg,
-      color-mix(in srgb, var(--surface) 92%, transparent) 0%,
-      color-mix(in srgb, var(--brand-soft) 70%, var(--surface)) 100%
-    );
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--white) 55%, transparent),
-    0 1px 2px color-mix(in srgb, var(--ink-a08, rgba(20, 26, 36, 0.08)) 80%, transparent);
   overflow: hidden;
-}
-html[data-theme="dark"] .topbar-brand-mark {
-  background:
-    linear-gradient(
-      160deg,
-      color-mix(in srgb, var(--surface) 88%, transparent) 0%,
-      color-mix(in srgb, var(--brand-soft) 55%, var(--surface)) 100%
-    );
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--white) 10%, transparent),
-    0 1px 2px rgba(0, 0, 0, 0.28);
 }
 .topbar-brand-copy {
   display: flex;
@@ -717,6 +637,7 @@ html[data-theme="dark"] .topbar-brand-mark {
   line-height: var(--lh-face);
   letter-spacing: var(--tracking-snug);
   color: var(--text);
+  font-weight: var(--fw-semibold);
 }
 .topbar-brand-copy .app-brand-tagline {
   display: none;
@@ -727,7 +648,7 @@ html[data-theme="dark"] .topbar-brand-mark {
   color: var(--text-3);
 }
 
-/* 桌面：居中悬浮胶囊导航 */
+/* 桌面：简洁导航 */
 .topbar-nav {
   display: none;
   flex: 1 1 auto;
@@ -737,24 +658,9 @@ html[data-theme="dark"] .topbar-brand-mark {
 .topbar-nav-track {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--space-1);
   max-width: 100%;
-  padding: 3px;
-  border-radius: var(--radius-pill);
-  border: var(--bw-1) solid color-mix(in srgb, var(--separator) 70%, transparent);
-  background: color-mix(in srgb, var(--surface) 58%, transparent);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--white) 42%, transparent),
-    0 1px 2px color-mix(in srgb, var(--ink-a04, rgba(20, 26, 36, 0.04)) 70%, transparent);
-  backdrop-filter: blur(var(--blur-3xl)) saturate(1.2);
-  -webkit-backdrop-filter: blur(var(--blur-3xl)) saturate(1.2);
-}
-html[data-theme="dark"] .topbar-nav-track {
-  border-color: color-mix(in srgb, var(--separator) 68%, transparent);
-  background: color-mix(in srgb, var(--surface) 42%, transparent);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--white) 7%, transparent),
-    0 1px 2px rgba(0, 0, 0, 0.18);
+  padding: 0;
 }
 
 .topbar-nav-item {
@@ -763,59 +669,40 @@ html[data-theme="dark"] .topbar-nav-track {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-height: var(--control-3xl);
-  padding: 0 14px;
+  min-height: 40px;
+  padding: 0 12px;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-md);
   background: transparent;
   color: var(--text-2);
-  font-size: var(--fs-base-plus);
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
   letter-spacing: var(--tracking-normal);
   line-height: 1;
   white-space: nowrap;
-  transition:
-    color var(--dur-fast) var(--ease),
-    background var(--dur-fast) var(--ease),
-    box-shadow var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
+  transition: color var(--dur-fast) var(--ease);
 }
 .topbar-nav-item:hover {
   color: var(--text);
-  background: color-mix(in srgb, var(--surface-2) 72%, transparent);
-}
-.topbar-nav-item:active {
-  transform: scale(0.975);
 }
 .topbar-nav-item.is-active {
-  color: var(--brand-2);
-  background: color-mix(in srgb, var(--brand-soft) 92%, var(--surface));
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--brand) 12%, transparent),
-    0 1px 2px color-mix(in srgb, var(--brand) 8%, transparent);
-}
-html[data-theme="dark"] .topbar-nav-item.is-active {
-  color: var(--brand-2);
-  background: color-mix(in srgb, var(--brand-soft) 58%, var(--surface));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand) 22%, transparent);
+  color: var(--brand);
 }
 .topbar-nav-icon {
   display: inline-grid;
   place-items: center;
   width: 16px;
   height: 16px;
-  opacity: 0.88;
-  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  opacity: 0.75;
 }
 .topbar-nav-item.is-active .topbar-nav-icon {
   opacity: 1;
-  transform: translateY(-0.5px);
 }
 .topbar-nav-label {
   display: inline-block;
 }
 
-/* 手机端顶栏右上角：制作 / 设置 */
+/* 右侧操作按钮 */
 .topbar-actions {
   display: inline-flex;
   align-items: center;
@@ -827,49 +714,28 @@ html[data-theme="dark"] .topbar-nav-item.is-active {
   align-items: center;
   justify-content: center;
   gap: var(--space-1);
-  min-height: var(--control-xl);
-  padding: 0 var(--space-2_5);
-  border: var(--bw-1) solid color-mix(in srgb, var(--separator) 90%, transparent);
-  border-radius: var(--radius-pill);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--surface) 94%, transparent) 0%,
-      color-mix(in srgb, var(--surface) 82%, transparent) 100%
-    );
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border: var(--bw-1) solid var(--separator);
+  border-radius: var(--radius-md);
+  background: transparent;
   color: var(--text-2);
   font-size: var(--fs-sm-plus);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--tracking-normal);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--white) 50%, transparent),
-    0 1px 2px color-mix(in srgb, var(--ink-a04, rgba(20, 26, 36, 0.04)) 100%, transparent);
-  backdrop-filter: blur(var(--blur-md));
-  -webkit-backdrop-filter: blur(var(--blur-md));
+  font-weight: var(--fw-medium);
   cursor: pointer;
-  transition:
-    background var(--dur-fast) var(--ease),
-    color var(--dur-fast) var(--ease),
-    border-color var(--dur-fast) var(--ease),
-    box-shadow var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
 }
 .topbar-action-btn:hover {
-  background: var(--brand-soft);
-  color: var(--brand-2);
-  border-color: color-mix(in srgb, var(--brand) 22%, transparent);
+  color: var(--brand);
+  border-color: var(--brand);
 }
 .topbar-action-btn:active {
-  transform: scale(0.96);
+  opacity: 0.85;
 }
 .topbar-action-btn.is-active {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--brand-soft) 88%, var(--surface)) 0%,
-      color-mix(in srgb, var(--brand-soft) 70%, var(--surface)) 100%
-    );
-  color: var(--brand-2);
+  color: var(--brand);
+  background: var(--brand-soft);
+}
   border-color: color-mix(in srgb, var(--brand) 22%, transparent);
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--brand) 12%, transparent),
@@ -1139,7 +1005,7 @@ body:has(.global-player) .bottom-nav::before {
   color: var(--text-3);
 }
 
-/* 桌面：居中悬浮胶囊导航 */
+/* 桌面：简洁导航 */
 .topbar-nav {
   display: none;
   flex: 1 1 auto;
@@ -1149,109 +1015,50 @@ body:has(.global-player) .bottom-nav::before {
 .topbar-nav-track {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--space-2);
   max-width: 100%;
-  padding: 3px;
-  border-radius: var(--radius-pill);
-  border: var(--bw-1) solid color-mix(in srgb, var(--separator) 88%, transparent);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--surface) 92%, transparent) 0%,
-      color-mix(in srgb, var(--surface) 78%, transparent) 100%
-    );
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--white) 55%, transparent),
-    0 8px 24px color-mix(in srgb, var(--blue-ink-a08, rgba(49, 79, 128, 0.08)) 90%, transparent),
-    0 1px 2px color-mix(in srgb, var(--ink-a04, rgba(20, 26, 36, 0.04)) 100%, transparent);
-  backdrop-filter: blur(var(--blur-3xl)) saturate(1.25);
-  -webkit-backdrop-filter: blur(var(--blur-3xl)) saturate(1.25);
+  padding: 0;
 }
-html[data-theme="dark"] .topbar-nav-track {
-  border-color: color-mix(in srgb, var(--separator) 80%, transparent);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--surface) 78%, transparent) 0%,
-      color-mix(in srgb, var(--surface) 62%, transparent) 100%
-    );
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--white) 8%, transparent),
-    0 10px 28px rgba(0, 0, 0, 0.28);
-}
-
 .topbar-nav-item {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-height: var(--control-3xl);
-  padding: 0 14px;
+  min-height: 40px;
+  padding: 0 12px;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-md);
   background: transparent;
   color: var(--text-2);
-  font-size: var(--fs-base-plus);
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
   letter-spacing: var(--tracking-normal);
   line-height: 1;
   white-space: nowrap;
-  transition:
-    color var(--dur-fast) var(--ease),
-    background var(--dur-fast) var(--ease),
-    box-shadow var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
+  transition: color var(--dur-fast) var(--ease);
 }
 .topbar-nav-item:hover {
   color: var(--text);
-  background: color-mix(in srgb, var(--surface-2) 72%, transparent);
-}
-.topbar-nav-item:active {
-  transform: scale(0.975);
 }
 .topbar-nav-item.is-active {
-  color: var(--brand-2);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--white) 88%, var(--brand-soft)) 0%,
-      color-mix(in srgb, var(--brand-soft) 88%, var(--surface)) 100%
-    );
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--brand) 16%, transparent),
-    0 1px 2px color-mix(in srgb, var(--brand) 12%, transparent),
-    0 6px 14px color-mix(in srgb, var(--brand-soft) 80%, transparent);
-}
-html[data-theme="dark"] .topbar-nav-item.is-active {
-  color: var(--brand-2);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--brand-soft) 70%, var(--surface)) 0%,
-      color-mix(in srgb, var(--brand-soft) 42%, var(--surface)) 100%
-    );
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--brand) 28%, transparent),
-    0 8px 18px rgba(0, 0, 0, 0.22);
+  color: var(--brand);
 }
 .topbar-nav-icon {
   display: inline-grid;
   place-items: center;
   width: 16px;
   height: 16px;
-  opacity: 0.88;
-  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  opacity: 0.75;
 }
 .topbar-nav-item.is-active .topbar-nav-icon {
   opacity: 1;
-  transform: translateY(-0.5px);
 }
 .topbar-nav-label {
   display: inline-block;
 }
 
-/* 手机端顶栏右上角：制作 / 设置 */
+/* 右侧操作按钮 */
 .topbar-actions {
   display: inline-flex;
   align-items: center;
@@ -1263,53 +1070,27 @@ html[data-theme="dark"] .topbar-nav-item.is-active {
   align-items: center;
   justify-content: center;
   gap: var(--space-1);
-  min-height: var(--control-xl);
-  padding: 0 var(--space-2_5);
-  border: var(--bw-1) solid color-mix(in srgb, var(--separator) 90%, transparent);
-  border-radius: var(--radius-pill);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--surface) 94%, transparent) 0%,
-      color-mix(in srgb, var(--surface) 82%, transparent) 100%
-    );
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border: var(--bw-1) solid var(--separator);
+  border-radius: var(--radius-md);
+  background: transparent;
   color: var(--text-2);
   font-size: var(--fs-sm-plus);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--tracking-normal);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--white) 50%, transparent),
-    0 1px 2px color-mix(in srgb, var(--ink-a04, rgba(20, 26, 36, 0.04)) 100%, transparent);
-  backdrop-filter: blur(var(--blur-md));
-  -webkit-backdrop-filter: blur(var(--blur-md));
+  font-weight: var(--fw-medium);
   cursor: pointer;
-  transition:
-    background var(--dur-fast) var(--ease),
-    color var(--dur-fast) var(--ease),
-    border-color var(--dur-fast) var(--ease),
-    box-shadow var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
 }
 .topbar-action-btn:hover {
-  background: var(--brand-soft);
-  color: var(--brand-2);
-  border-color: color-mix(in srgb, var(--brand) 22%, transparent);
+  color: var(--brand);
+  border-color: var(--brand);
 }
 .topbar-action-btn:active {
-  transform: scale(0.96);
+  opacity: 0.85;
 }
 .topbar-action-btn.is-active {
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--brand-soft) 88%, var(--surface)) 0%,
-      color-mix(in srgb, var(--brand-soft) 70%, var(--surface)) 100%
-    );
-  color: var(--brand-2);
-  border-color: color-mix(in srgb, var(--brand) 22%, transparent);
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--brand) 12%, transparent),
-    0 4px 12px color-mix(in srgb, var(--brand-soft) 70%, transparent);
+  color: var(--brand);
+  background: var(--brand-soft);
 }
 .topbar-action-icon {
   display: inline-grid;
